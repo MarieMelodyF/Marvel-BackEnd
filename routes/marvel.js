@@ -13,7 +13,7 @@ const API_KEY_MARVEL = process.env.API_KEY_MARVEL;
 router.get("/comics", async (req, res) => {
   try {
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${API_KEY_MARVEL}`
+      `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${process.env.API_KEY_MARVEL}`
     );
     res.json(response.data);
   } catch (error) {
@@ -26,7 +26,7 @@ router.get("/comic/:comicId", async (req, res) => {
   //5fce13de78edeb0017c92d68
   try {
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/comic/${req.params.comicId}?apiKey=${API_KEY_MARVEL}`
+      `https://lereacteur-marvel-api.herokuapp.com/comic?apiKey=${process.env.API_KEY_MARVEL}&name=${name}&skip=${skip}&limit=${limit}`
     );
     res.json(response.data);
   } catch (error) {
@@ -37,8 +37,11 @@ router.get("/comic/:comicId", async (req, res) => {
 // Route comics/characterId. Comics lié au personnage - ID OK
 router.get("/comics/:characterId", async (req, res) => {
   try {
+    const name = req.query.name || "";
+    const skip = req.query.skip || 0;
+    const limit = req.query.limit || 100;
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/comics/${req.params.characterId}?apiKey=${API_KEY_MARVEL}`
+      `https://lereacteur-marvel-api.herokuapp.com/comics/${req.params.characterId}?apiKey=${process.env.API_KEY_MARVEL}`
     );
     res.json(response.data);
   } catch (error) {
@@ -48,6 +51,9 @@ router.get("/comics/:characterId", async (req, res) => {
 
 // Route characters - OK
 router.get("/characters", async (req, res) => {
+  const name = req.query.name || "";
+  const skip = req.query.skip || 0;
+  const limit = req.query.limit || 100;
   try {
     const name = req.query.name || "";
     const skip = req.query.skip || 0;
@@ -65,8 +71,11 @@ router.get("/characters", async (req, res) => {
 // Route characters par ID - ID OK
 router.get("/character/:characterId", async (req, res) => {
   try {
+    const name = req.query.name || "";
+    const skip = req.query.skip || 0;
+    const limit = req.query.limit || 100;
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/character/${req.params.characterId}?apiKey=${API_KEY_MARVEL}`
+      `https://lereacteur-marvel-api.herokuapp.com/character/${req.params.characterId}?apiKey=${process.env.API_KEY_MARVEL}`
     );
     res.json(response.data);
   } catch (error) {
