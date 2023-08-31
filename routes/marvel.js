@@ -12,7 +12,7 @@ const API_KEY_MARVEL = process.env.API_KEY_MARVEL;
 // Route comics - ID OK
 router.get("/comics", async (req, res) => {
   try {
-    const title = req.query.tile || "";
+    const title = req.query.title || "";
     const skip = req.query.skip || 0;
     const limit = req.query.limit || 100;
     const response = await axios.get(
