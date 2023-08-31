@@ -4,6 +4,7 @@ const express = require("express"); // import du package express
 const cors = require("cors");
 const app = express();
 app.use(cors());
+app.use(express.json());
 const router = express.Router();
 
 const API_KEY_MARVEL = process.env.API_KEY_MARVEL;
@@ -33,7 +34,7 @@ router.get("/comic/:comicId", async (req, res) => {
   }
 });
 
-// Route comics/characterId. Get a list of comics containing a specific character - ID OK
+// Route comics/characterId. Comics lié au personnage - ID OK
 router.get("/comics/:characterId", async (req, res) => {
   try {
     const response = await axios.get(
