@@ -12,12 +12,8 @@ const API_KEY_MARVEL = process.env.API_KEY_MARVEL;
 // Route comics - ID OK
 router.get("/comics", async (req, res) => {
   try {
-    const name = req.query.name || "";
-    const skip = req.query.skip || 0;
-    const limit = req.query.limit || 100;
-
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${process.env.API_KEY_MARVEL}&name=${name}&skip=${skip}&limit=${limit}`
+      `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${API_KEY_MARVEL}`
     );
     res.json(response.data);
   } catch (error) {
@@ -53,8 +49,12 @@ router.get("/comics/:characterId", async (req, res) => {
 // Route characters - OK
 router.get("/characters", async (req, res) => {
   try {
+    const name = req.query.name || "";
+    const skip = req.query.skip || 0;
+    const limit = req.query.limit || 100;
+
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${API_KEY_MARVEL}`
+      `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${process.env.API_KEY_MARVEL}&name=${name}&skip=${skip}&limit=${limit}`
     );
     res.json(response.data);
   } catch (error) {
