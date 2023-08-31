@@ -1,13 +1,25 @@
-require("dotenv").config();
 const express = require("express"); // import du package express
 const cors = require("cors");
-const app = express();
-app.use(cors());
+const mongoose = require("mongoose");
 
-// import route Marvel
+const app = express();
+app.use(express.json());
+app.use(cors());
+require("dotenv").config();
+
+// Connexion à mongoose
+mongoose.connect(process.env.MONGODB_URI);
+
+// import route marvel & user
 const MarvelRoutes = require("./routes/marvel");
 app.use(MarvelRoutes);
+// import route user
+const userRoutes = require("./routes/user");
+app.use(userRoutes);
+// import models User
+const User = require("./models/User");
 
+// routes de base
 app.get("/", (req, res) => {
   try {
     res.status(200).json("Bienvenue sur le serveur Marvel ! ");
@@ -15,8 +27,6 @@ app.get("/", (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
-
-// routes
 
 app.all("*", (req, res) => {
   try {
