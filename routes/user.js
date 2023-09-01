@@ -18,10 +18,10 @@ router.post("/user/signup", async (req, res) => {
     const register = await User.findOne({ email: req.body.email });
     if (register) {
       res
-        .statut(400)
+        .status(400)
         .json({ message: "Email already exist ! Use your account 🚀" });
     } else if (!req.body.user || !req.body.password) {
-      res.statut(400).json({ message: "Missing parameters" });
+      res.status(400).json({ message: "Missing parameters" });
     } else {
       const salt = uid(16);
       const token = uid(16);
@@ -36,7 +36,7 @@ router.post("/user/signup", async (req, res) => {
         salt: salt,
       });
       await newUser.save();
-      res.statut(200).json({
+      res.status(200).json({
         _id: newUser._id,
         token: newUser.token,
         username: newUser.username,
