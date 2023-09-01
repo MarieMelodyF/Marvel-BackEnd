@@ -1,6 +1,7 @@
 const express = require("express"); // import du package express
 const cors = require("cors");
-const mongoose = require("mongoose");
+const router = express.Router();
+// const mongoose = require("mongoose");
 const SHA256 = require("crypto-js/sha256");
 const encBase64 = require("crypto-js/enc-base64");
 const uid = require("uid2");
@@ -8,7 +9,6 @@ const uid = require("uid2");
 const app = express();
 app.use(cors());
 app.use(express.json());
-const router = express.Router();
 
 // import du model
 const User = require("../models/User");
@@ -46,3 +46,4 @@ router.post("/user/signup", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+module.exports = router;

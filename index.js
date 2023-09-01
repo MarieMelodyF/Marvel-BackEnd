@@ -10,12 +10,14 @@ require("dotenv").config();
 // Connexion à mongoose
 mongoose.connect(process.env.MONGODB_URI);
 
-// import route marvel & user
+// import route marvel
 const MarvelRoutes = require("./routes/marvel");
 app.use(MarvelRoutes);
 // import route user
-const userRoutes = require("./routes/user");
-app.use(userRoutes);
+const UserRoutes = require("./routes/user");
+app.use(UserRoutes);
+// import middleware
+const isAuthenticated = require("./middlewares/isAuthenticated");
 // import models User
 const User = require("./models/User");
 
