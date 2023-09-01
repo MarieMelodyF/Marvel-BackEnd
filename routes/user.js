@@ -15,7 +15,9 @@ const User = require("../models/User");
 
 router.post("/user/signup", async (req, res) => {
   try {
+    console.log(req.body);
     const register = await User.findOne({ email: req.body.email });
+
     if (register) {
       res
         .status(400)
@@ -28,7 +30,6 @@ router.post("/user/signup", async (req, res) => {
       const newUser = new User({
         email: req.body.email,
         username: req.body.username,
-        paswword: req.body.password,
         token: token,
         hash: hash,
         salt: salt,
