@@ -20,8 +20,6 @@ router.post("/user/signup", async (req, res) => {
       res
         .status(400)
         .json({ message: "Email already exist ! Use your account 🚀" });
-    } else if (!req.body.user || !req.body.password) {
-      res.status(400).json({ message: "Missing parameters" });
     } else {
       const salt = uid(16);
       const token = uid(16);
@@ -35,6 +33,7 @@ router.post("/user/signup", async (req, res) => {
         hash: hash,
         salt: salt,
       });
+      console.log(newUser);
       await newUser.save();
       res.status(200).json({
         _id: newUser._id,
