@@ -16,12 +16,19 @@ const User = require("../models/User");
 router.post("/user/signup", async (req, res) => {
   try {
     console.log(req.body);
-    const register = await User.findOne({ email: req.body.email });
+    const existingMail = await User.findOne({ email: req.body.email });
+    const existingUser = await User.findOne({ username: req.body.username });
 
-    if (register) {
+    if (existingMail) {
       res
         .status(400)
         .json({ message: "Email already exist ! Use your account 🚀" });
+    } else if (existingUser) {
+      res
+        .status(400)
+        .json({
+          message: "This username already exist ! Choose another username 🤟🏼 !",
+        });
     } else {
       const salt = uid(16);
       const token = uid(16);
