@@ -21,8 +21,8 @@ app.use(UserRoutes);
 const LoginRoutes = require("./routes/login");
 app.use(LoginRoutes);
 // import route favComics
-const ComicsFavorites = require("./routes/comicsFavorites");
-app.use(ComicsFavorites);
+// const ComicsFavorites = require("./routes/comicsFavorites");
+// app.use(ComicsFavorites);
 // ---------------
 // ---------------
 // import middleware
