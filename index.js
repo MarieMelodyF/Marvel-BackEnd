@@ -10,6 +10,7 @@ require("dotenv").config();
 // Connexion à mongoose
 mongoose.connect(process.env.MONGODB_URI);
 // ---------------
+// ---------------
 // import route marvel
 const MarvelRoutes = require("./routes/marvel");
 app.use(MarvelRoutes);
@@ -19,11 +20,16 @@ app.use(UserRoutes);
 // import route login
 const LoginRoutes = require("./routes/login");
 app.use(LoginRoutes);
+// import route favComics
+const ComicsFavorites = require("./routes/comicsFavorites");
+app.use(ComicsFavorites);
+// ---------------
 // ---------------
 // import middleware
 const isAuthenticated = require("./middlewares/isAuthenticated");
 // import models User
 const User = require("./models/User");
+// ---------------
 // ---------------
 // routes de base
 app.get("/", (req, res) => {
