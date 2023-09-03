@@ -10,7 +10,7 @@ const User = require("../models/User");
 
 const API_KEY_MARVEL = process.env.API_KEY_MARVEL;
 
-router.get("/favoritesComcis", async (req, res) => {
+router.get("/favoritesComics", async (req, res) => {
   const usertoken = req.query.token;
   //   console.log(usertoken);
   try {
