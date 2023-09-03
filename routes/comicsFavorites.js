@@ -35,8 +35,13 @@ router.post("comics/addToFav", async (req, res) => {
   const favComicsId = req.body.favComicsId;
 
   try {
-    user.favoritesComics.push(favComicsId);
-    res.status(200).json({ message: "Favoris ajouté" });
+    if (user) {
+      user.favoritesComics.push(favComicsId);
+      await user.save();
+      res.status(200).json({ message: "Favoris ajouté" });
+    } else {
+      res.status(400).json({ message: "user not found" });
+    }
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
