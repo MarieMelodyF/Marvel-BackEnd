@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const User = require("./user");
+const User = require("../models/User");
 
 const API_KEY_MARVEL = process.env.API_KEY_MARVEL;
 
