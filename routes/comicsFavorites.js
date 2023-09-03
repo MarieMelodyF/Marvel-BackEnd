@@ -29,7 +29,8 @@ router.get("/favoritesComcis", async (req, res) => {
   }
 });
 
-router.post("comics/addToFav", async (req, res) => {
+router.post("/comics/addToFav", async (req, res) => {
+  const usertoken = req.query.token;
   const user = await User.findOne({ token: usertoken });
 
   const favComicsId = req.body.favComicsId;
