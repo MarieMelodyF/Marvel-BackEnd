@@ -12,19 +12,26 @@ const API_KEY_MARVEL = process.env.API_KEY_MARVEL;
 
 router.get("/favoritesComcis", async (req, res) => {
   const usertoken = req.query.token;
+  //   console.log(usertoken);
   try {
     const user = await User.findOne({ token: usertoken }).populate(
       "favoritesComics"
     );
-
-    res.status(200).json({ favorites: user.favoritesComics });
+    if (user) {
+      res.status(200).json({ favorites: user.favoritesComics });
+      console.log(user);
+    } else {
+      res.status(400).json({ message: "user not found" });
+    }
   } catch (error) {
+    console.log(error);
     res.status(400).json({ message: error.message });
   }
 });
 
 router.post("comics/addToFav", async (req, res) => {
   const user = await User.findOne({ token: usertoken });
+
   const favComicsId = req.body.favComicsId;
 
   try {
